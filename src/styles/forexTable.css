@@ -1,0 +1,127 @@
+.dashboard {
+    font-family: 'Roboto Mono', monospace;
+    margin: auto;
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .terminal {
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 8px 16px;
+
+    color: #fff;
+    margin: auto;
+  }
+  
+  .asset-section {
+    min-width: 140px;
+    border-right: 1px solid #2a2a2a;
+    padding-right: 16px;
+  }
+  
+  .asset-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .asset-name {
+    font-size: 8px;
+    font-weight: bold;
+    color: #00ff00;
+  }
+  
+  .timestamp {
+    font-size: 8px;
+    color: #666;
+  }
+  
+  .price {
+    font-size: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .momentum-arrow {
+    font-size: 10px;
+    margin-left: 4px;
+  }
+  
+  .primary-indicators {
+    display: flex;
+    gap: 16px;
+    border-right: 1px solid #2a2a2a;
+    padding-right: 16px;
+    padding-left: 16px;
+    border-left: 1px solid #2a2a2a;
+  }
+  
+  .moving-averages {
+    border-right: 1px solid #2a2a2a;
+    padding-right: 16px;
+  }
+  
+  .ma-group {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .stoch-section {
+    display: flex;
+    gap: 12px;
+    border-right: 1px solid #2a2a2a;
+    padding-right: 16px;
+  }
+  
+  .indicator, .ma-item, .stoch-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .label {
+    font-size: 8px;
+    color: #666;
+    margin-bottom: 2px;
+  }
+  
+  .alerts {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .alert {
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 9px;
+    font-weight: bold;
+  }
+  
+  .success {
+    color: #00ff00;
+  }
+  
+  .danger {
+    color: #ff3366;
+  }
+  
+  .neutral {
+    color: #ffffff;
+  }
+  
+  .alert.success {
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff00;
+  }
+  
+  .alert.danger {
+    background-color: rgba(255, 51, 102, 0.1);
+    border: 1px solid #ff3366;
+  }

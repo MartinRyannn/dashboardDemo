@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$background: #0a0a0a;
+$surface: #141414;
+$surfaceHover: #1a1a1a;
+$accent: #303030;
+$highlight: #444444;
+$text: #f0f0f0;
+$textSecondary: #8e8e8e;
+$red: #ff3a41;
+$terminal: #00ff41;
+$activeGreen: rgba(0, 255, 65, 0.2);
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
+  box-sizing: border-box;
+}
+
+.toolsContainer {
+  width: min(90vw, 420px);
+  height: min(85vh, 620px);
+  background-color: $background;
+  border: 1px solid $accent;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 16px;
+  display: none;
+  flex-direction: column;
+  z-index: 999999999999999;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.toolsContainer.show {
+  display: flex;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toolsContainer.hide {
+  display: none;
+  animation: fadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toolsHeader {
+  width: 100%;
+  height: auto;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: $surface;
+  border-bottom: 1px solid $accent;
+  position: relative;
+}
+
+.headerDots {
+  display: flex;
+  gap: 6px;
+  
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $accent;
+    
+    &:first-child {
+      background-color: $red;
+    }
+  }
+}
+
+.mainToolsTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $text;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.closeButton {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  
+  &:hover {
+    background-color: rgba($red, 0.1);
+    
+    &::before,
+    &::after {
+      background-color: $red;
+    }
+  }
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 1px;
+    background-color: $textSecondary;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: background-color 0.2s ease;
+  }
+  
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+.toolsContent {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolBox {
+  width: 100%;
+  border: 1px solid $accent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: $surface;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  
+  &:hover:not(:disabled) {
+    background-color: $surfaceHover;
+    border-color: $highlight;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    .toolTitle {
+      color: $text;
+    }
+    
+    .toolIconBox {
+      border-color: $highlight;
+      background-color: $accent;
+      
+      .toolIcon {
+        background-color: $terminal;
+        box-shadow: 0 0 10px rgba($terminal, 0.5);
+      }
+    }
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+  }
+  
+  &.active {
+    background-color: $activeGreen;
+    border-color: $terminal;
+    transform: translateY(0);
+    box-shadow: 0 0 15px rgba($terminal, 0.2);
+    
+    .toolTitle {
+      color: $terminal;
+    }
+    
+    .toolIconBox {
+      border-color: $terminal;
+      background-color: rgba($terminal, 0.1);
+      
+      .toolIcon {
+        background-color: $terminal;
+        box-shadow: 0 0 10px rgba($terminal, 0.7);
+      }
+    }
+    
+    .toolDesc {
+      color: rgba($terminal, 0.8);
+    }
+    
+    &::after {
+      content: 'Processing... Might Take Some Time';
+      position: absolute;
+      bottom: 2px;
+      right: 8px;
+      font-size: 0.65rem;
+      color: $terminal;
+      opacity: 0.8;
+      font-style: italic;
+    }
+  }
+}
+
+.toolIconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid $accent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  background-color: $surface;
+  transition: all 0.3s ease;
+  
+  .toolIcon {
+    width: 18px;
+    height: 18px;
+    background-color: $textSecondary;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center;
+    transition: all 0.3s ease;
+  }
+}
+
+.toolInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.toolTitle {
+  color: $textSecondary;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.toolDesc {
+  color: $textSecondary;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 3px;
+  transition: color 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+}
+
+.toolsContent {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $surface;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $accent;
+    border-radius: 2px;
+    
+    &:hover {
+      background: $highlight;
+    }
+  }
+}

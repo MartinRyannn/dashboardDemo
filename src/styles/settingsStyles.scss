@@ -1,0 +1,340 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .settingsContainer {
+    width: 380px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    z-index: 99999999999999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #e0e0e0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-y: hidden;
+    
+    &.show {
+      display: flex;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    &.hide {
+      display: none;
+      animation: fadeOut 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  }
+  
+  .settingsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    
+    .closeButton {
+      background: none;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+    }
+  }
+  
+  .settingsContent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+    }
+  }
+  
+  .settingsSection {
+    margin-bottom: 30px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .sectionHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-left: 8px;
+      color: #ffffff;
+    }
+    
+    .sectionIcon {
+      color: #00c853;
+      font-size: 18px;
+      margin-right: 8px;
+    }
+  }
+  
+  .settingItem {
+    margin-bottom: 20px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .settingLabel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    
+    .settingValue {
+      color: #00c853;
+      font-weight: 500;
+    }
+  }
+  
+  .sliderContainer {
+    position: relative;
+    
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+      
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #00c853;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          transform: scale(1.2);
+          box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+      }
+      
+      &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #00c853;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          transform: scale(1.2);
+          box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+      }
+    }
+    
+    .sliderLabels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 11px;
+      color: #888;
+    }
+  }
+  
+  .toggleContainer {
+    display: flex;
+    align-items: center;
+    
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        
+        &:checked + .toggleSlider {
+          background-color: #00c853;
+          
+          &:before {
+            transform: translateX(20px);
+          }
+        }
+      }
+      
+      .toggleSlider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: .3s;
+        border-radius: 24px;
+        
+        &:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: .3s;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  
+  .settingActions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    .actionButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      
+      .buttonIcon {
+        font-size: 16px;
+      }
+      
+      &.resetButton {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: #e0e0e0;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.12);
+        }
+      }
+      
+      &.killButton {
+        background-color: rgba(255, 59, 48, 0.15);
+        color: #ff3b30;
+        
+        &:hover {
+          background-color: rgba(255, 59, 48, 0.25);
+        }
+      }
+    }
+  }
+  
+  .settingsFooter {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: flex-end;
+
+    .saveButton {
+      padding: 8px 20px;
+      border-radius: 4px;
+      background-color: rgba(82, 217, 129, 0.1);
+      color: rgba(82, 217, 129, 0.5);
+      border: 1px solid rgba(82, 217, 129, 0.2);
+      cursor: not-allowed;
+      transition: all 0.3s ease;
+
+      &.active {
+        background-color: rgba(82, 217, 129, 0.2);
+        color: rgba(82, 217, 129, 1);
+        border-color: rgba(82, 217, 129, 0.4);
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(82, 217, 129, 0.3);
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.96);
+    }
+  }
+  
