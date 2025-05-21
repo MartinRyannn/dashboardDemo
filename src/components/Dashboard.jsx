@@ -18,8 +18,6 @@ import {
   Legend,
   TimeScale,
 } from "chart.js"
-import "chartjs-plugin-annotation"
-import "chartjs-plugin-zoom"
 import { motion, AnimatePresence } from "framer-motion"
 import Settings from "../extras/Settings.jsx"
 import ActiveOrdersTable from './ActiveOrdersTable'
